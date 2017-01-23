@@ -2,6 +2,7 @@
 package router
 
 import (
+	"fmt"
 	"net"
 	"net/http"
 	"path"
@@ -124,8 +125,12 @@ func (r *Route) MatchContainer(id, name string, labels map[string]string) bool {
 		if len(labelParts) > 1 {
 			labelKey := labelParts[0]
 			labelValue := labelParts[1]
+			fmt.Println("labelKey  :"+labelKey)
+			fmt.Println("labelValue  :"+labelValue)
+			fmt.Println("labels[labelKey]  :"+labels[labelKey])
 			labelMatch, labelErr := path.Match(labelValue, labels[labelKey])
-			if labelErr != nil || (labelValue != "" && !labelMatch) {
+			fmt.Println("labelMatch  :"+labelMatch)
+			if labelErr != nil || (labelValue != "" && !labelMatch) {				
 				return false
 			}
 		}
